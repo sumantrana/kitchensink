@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import java.math.BigInteger;
 import java.util.List;
 import java.util.Optional;
 
@@ -48,8 +49,8 @@ public class MemberController {
         return new ResponseEntity<>(memberService.findAllOrderedByName(), HttpStatus.OK);
     }
 
-    @GetMapping(path = "/rest/members/{id:[0-9]+}")
-    public ResponseEntity<Member> lookupMemberById(@PathVariable("id") long id) {
+    @GetMapping(path = "/rest/members/{id}")
+    public ResponseEntity<Member> lookupMemberById(@PathVariable("id") BigInteger id) {
 
         Optional<Member> member = memberService.findById(id);
         return member.map(ResponseEntity::ok)
